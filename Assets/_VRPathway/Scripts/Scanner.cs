@@ -10,18 +10,32 @@ public class Scanner : XRGrabInteractable
     public LineRenderer laserRenderer;
 
 
+    private AudioSource audioSource;
+
+    public AudioClip grabbedSound;
+    public AudioClip throwedSound;
+    public AudioClip activatedSound;
+
+
     protected override void Awake()
     {
         base.Awake();
         laserRenderer.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         base.OnSelectEntered(args);
         animator.SetBool("Opened", true);
+        audioSource.PlayOneShot(grabbedSound);
+
+        args.interactorObject.transform.gameObject.GetComponent<XRBaseControllerInteractor>().SendHapticImpulse(1, 0.2f);
     }
 
 
@@ -29,6 +43,7 @@ public class Scanner : XRGrabInteractable
     {
         base.OnSelectExited(args);
         animator.SetBool("Opened", false);
+        audioSource.PlayOneShot(throwedSound);
     }
 
 
@@ -36,6 +51,8 @@ public class Scanner : XRGrabInteractable
     {
         base.OnActivated(args);
         laserRenderer.gameObject.SetActive(true);
+        audioSource.clip = activatedSound;
+        audioSource.Play();
     }
 
 
@@ -43,6 +60,7 @@ public class Scanner : XRGrabInteractable
     {
         base.OnDeactivated(args);
         laserRenderer.gameObject.SetActive(false);
+        audioSource.Stop();
     }
 
 }
