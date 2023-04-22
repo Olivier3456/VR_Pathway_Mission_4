@@ -21,10 +21,8 @@ public class Scanner : XRGrabInteractable
 
     protected override void Awake()
     {
-        base.Awake();
-        laserRenderer.gameObject.SetActive(false);
-        targetName.gameObject.SetActive(false);
-        targetPosition.gameObject.SetActive(false);
+        base.Awake();        
+        ScannerActivated(false);
     }
 
     private void Start()
@@ -38,7 +36,6 @@ public class Scanner : XRGrabInteractable
         base.OnSelectEntered(args);
         animator.SetBool("Opened", true);
         audioSource.PlayOneShot(grabbedSound);
-
         args.interactorObject.transform.gameObject.GetComponent<XRBaseControllerInteractor>().SendHapticImpulse(1, 0.2f);
         Debug.Log(args.interactorObject.transform.name + " a vibré.");
     }
@@ -54,22 +51,26 @@ public class Scanner : XRGrabInteractable
 
     protected override void OnActivated(ActivateEventArgs args)
     {
-        base.OnActivated(args);
-        laserRenderer.gameObject.SetActive(true);
+        base.OnActivated(args);       
         audioSource.clip = activatedSound;
         audioSource.Play();
-        targetName.gameObject.SetActive(true);
-        targetPosition.gameObject.SetActive(true);
+        ScannerActivated(true);
     }
 
 
     protected override void OnDeactivated(DeactivateEventArgs args)
     {
-        base.OnDeactivated(args);
-        laserRenderer.gameObject.SetActive(false);
+        base.OnDeactivated(args);       
         audioSource.Stop();
-        targetName.gameObject.SetActive(false);
-        targetPosition.gameObject.SetActive(false);
+        ScannerActivated(false);
+    }
+
+
+    private void ScannerActivated(bool isActivated)
+    {
+        laserRenderer.gameObject.SetActive(isActivated);
+        targetName.gameObject.SetActive(isActivated);
+        targetPosition.gameObject.SetActive(isActivated);
     }
 
 }
