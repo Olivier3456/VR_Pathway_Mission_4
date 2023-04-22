@@ -55,6 +55,7 @@ public class Scanner : XRGrabInteractable
         audioSource.clip = activatedSound;
         audioSource.Play();
         ScannerActivated(true);
+        ScanForObjects();
     }
 
 
@@ -71,6 +72,17 @@ public class Scanner : XRGrabInteractable
         laserRenderer.gameObject.SetActive(isActivated);
         targetName.gameObject.SetActive(isActivated);
         targetPosition.gameObject.SetActive(isActivated);
+    }
+
+
+    private void ScanForObjects()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(laserRenderer.transform.position, laserRenderer.transform.forward, out hit))
+        {
+            targetName.SetText(hit.collider.name);
+            targetPosition.SetText(hit.collider.transform.position.ToString());
+        }
     }
 
 }

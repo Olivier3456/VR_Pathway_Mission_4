@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1397
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 122
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 159
+  controlID: 161
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 123
+  controlID: 162
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -243,8 +243,8 @@ MonoBehaviour:
     y: 846
     width: 1285
     height: 501
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 14}
@@ -296,8 +296,8 @@ MonoBehaviour:
     y: 0
     width: 630
     height: 1347
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -742,9 +742,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 17.13125, y: 3.4658237, z: 4.6929245}
+    m_Target: {x: 0.9526151, y: 1.2996616, z: 3.318987}
     speed: 2
-    m_Value: {x: 17.13125, y: 3.4658237, z: 4.6929245}
+    m_Value: {x: 0.9526151, y: 1.2996616, z: 3.318987}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -791,13 +791,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.07813818, y: -0.8944106, z: 0.17264748, w: -0.40523863}
+    m_Target: {x: 0.52197915, y: 0.0053480533, z: -0.003343559, w: 0.85299677}
     speed: 2
-    m_Value: {x: -0.077875175, y: -0.8949721, z: 0.17275575, w: -0.4038761}
+    m_Value: {x: 0.5219517, y: 0.0053477716, z: -0.0033433829, w: 0.8529518}
   m_Size:
-    m_Target: 0.8660254
+    m_Target: 0.9997937
     speed: 2
-    m_Value: 0.8660259
+    m_Value: 0.9567404
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -865,22 +865,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_XRITemplate/HoverHighlight/Scripts
+    - Assets/_VRPathway/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/_XRITemplate/HoverHighlight/Scripts
+  - Assets/_VRPathway/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Utilisateur\Desktop\Projets des tutos Unity Learn\VR_Mission_4
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 281}
-    m_SelectedIDs: de250100
-    m_LastClickedID: 75230
-    m_ExpandedIDs: 000000000a8e00000c8e00000e8e0000108e0000128e0000148e0000408e00005a8e0000b68f0000b88f0000ba8f0000ea8f00007e98000020e4000022e4000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: a08e0000
+    m_LastClickedID: 36512
+    m_ExpandedIDs: 00000000848e0000868e0000888e00008a8e00008c8e00008e8e0000908e0000928e0000948e0000968e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -908,7 +908,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 2264fbff
     m_LastClickedID: -302046
-    m_ExpandedIDs: 000000000a8e00000c8e00000e8e0000108e0000128e0000148e0000
+    m_ExpandedIDs: 00000000848e0000868e0000888e00008a8e00008c8e00008e8e0000908e0000928e0000948e0000968e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1026,24 +1026,24 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 1271}
-      m_SelectedIDs: 120a0000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 7cecfeff84ecfeff4cdeffff4edeffff54deffff56deffff5adeffff5edeffff60defffffceefffffeeeffffb4f2ffffc2f2fffff0faffff00fbffff28fbffff2afbffffa4600000be60000074610000f0610000ba620000c2620000dc620000a4630000026400006c640000a8640000be640000ea640000766500008c65000096650000ba660000be66000040670000446700009c670000e0670000fc670000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 92efffff
+      m_LastClickedID: -4206
+      m_ExpandedIDs: 2afbffff00650000b6650000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: HoverStateVisuals - Only Hover
-        m_OriginalName: HoverStateVisuals - Only Hover
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -3440
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 11}
       m_SearchString: 
