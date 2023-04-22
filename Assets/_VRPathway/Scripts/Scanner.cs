@@ -11,7 +11,7 @@ public class Scanner : XRGrabInteractable
     public LineRenderer laserRenderer;
     public TextMeshProUGUI targetName;
     public TextMeshProUGUI targetPosition;
-    
+
     private AudioSource audioSource;
     [Space(10)]
     public AudioClip grabbedSound;
@@ -21,13 +21,24 @@ public class Scanner : XRGrabInteractable
 
     protected override void Awake()
     {
-        base.Awake();        
+        base.Awake();
         ScannerActivated(false);
     }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+
+    public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+    {
+        base.ProcessInteractable(updatePhase);
+
+        if (laserRenderer.gameObject.activeSelf)
+        {
+            ScanForObjects();
+        }
     }
 
 
@@ -45,24 +56,27 @@ public class Scanner : XRGrabInteractable
     {
         base.OnSelectExited(args);
         animator.SetBool("Opened", false);
+        audioSource.loop = false;
+        audioSource.Stop();
         audioSource.PlayOneShot(throwedSound);
     }
 
 
     protected override void OnActivated(ActivateEventArgs args)
     {
-        base.OnActivated(args);       
+        base.OnActivated(args);
         audioSource.clip = activatedSound;
         audioSource.Play();
-        ScannerActivated(true);
-        ScanForObjects();
+        audioSource.loop = true;
+        ScannerActivated(true);        
     }
 
 
     protected override void OnDeactivated(DeactivateEventArgs args)
     {
-        base.OnDeactivated(args);       
+        base.OnDeactivated(args);
         audioSource.Stop();
+        audioSource.loop = false;
         ScannerActivated(false);
     }
 
@@ -78,11 +92,14 @@ public class Scanner : XRGrabInteractable
     private void ScanForObjects()
     {
         RaycastHit hit;
+        Vector3 worldHit = laserRenderer.transform.position + laserRenderer.transform.forward * 1000.0f;
         if (Physics.Raycast(laserRenderer.transform.position, laserRenderer.transform.forward, out hit))
         {
             targetName.SetText(hit.collider.name);
             targetPosition.SetText(hit.collider.transform.position.ToString());
+            worldHit = hit.point;
         }
-    }
 
+        laserRenderer.SetPosition(1, laserRenderer.transform.InverseTransformPoint(worldHit));
+    }
 }
