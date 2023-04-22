@@ -11,13 +11,19 @@ public class Scanner : XRGrabInteractable
     public LineRenderer laserRenderer;
     public TextMeshProUGUI targetName;
     public TextMeshProUGUI targetPosition;
+    public TextMeshProUGUI targetDistance;
+    public TextMeshProUGUI targetSize;
 
     private AudioSource audioSource;
     [Space(10)]
     public AudioClip grabbedSound;
     public AudioClip throwedSound;
     public AudioClip activatedSound;
+    [Space(10)]
+    public Material hitObjectMaterial;
+    private Material hitObjectOriginalMaterial;
 
+    private Transform lastObjectHit;
 
     protected override void Awake()
     {
@@ -68,7 +74,7 @@ public class Scanner : XRGrabInteractable
         audioSource.clip = activatedSound;
         audioSource.Play();
         audioSource.loop = true;
-        ScannerActivated(true);        
+        ScannerActivated(true);
     }
 
 
@@ -84,8 +90,14 @@ public class Scanner : XRGrabInteractable
     private void ScannerActivated(bool isActivated)
     {
         laserRenderer.gameObject.SetActive(isActivated);
+
         targetName.gameObject.SetActive(isActivated);
         targetPosition.gameObject.SetActive(isActivated);
+        targetDistance.gameObject.SetActive(isActivated);
+        targetSize.gameObject.SetActive(isActivated);
+
+        if (!isActivated && lastObjectHit != null && lastObjectHit.transform.gameObject.GetComponent<Renderer>() != null) lastObjectHit.transform.gameObject.GetComponent<Renderer>().material = hitObjectOriginalMaterial;
+        else if (lastObjectHit != null && lastObjectHit.transform.gameObject.GetComponent<Renderer>() != null) lastObjectHit.transform.gameObject.GetComponent<Renderer>().material = hitObjectMaterial;
     }
 
 
@@ -93,11 +105,47 @@ public class Scanner : XRGrabInteractable
     {
         RaycastHit hit;
         Vector3 worldHit = laserRenderer.transform.position + laserRenderer.transform.forward * 1000.0f;
+
         if (Physics.Raycast(laserRenderer.transform.position, laserRenderer.transform.forward, out hit))
         {
-            targetName.SetText(hit.collider.name);
-            targetPosition.SetText(hit.collider.transform.position.ToString());
             worldHit = hit.point;
+
+            if (lastObjectHit != hit.collider.transform)
+            {
+
+                targetName.SetText(hit.collider.name);
+                targetPosition.SetText(hit.collider.transform.position.ToString());
+
+                if (hit.collider.GetComponent<MeshRenderer>() != null) targetSize.SetText("Size: " + hit.collider.GetComponent<MeshRenderer>().bounds.size);
+                
+                if (lastObjectHit != null && lastObjectHit.transform.gameObject.GetComponent<Renderer>() != null) lastObjectHit.transform.gameObject.GetComponent<Renderer>().material = hitObjectOriginalMaterial;
+
+                if (hit.collider.transform.gameObject.GetComponent<Renderer>() != null)
+                {
+                    hitObjectOriginalMaterial = hit.collider.transform.gameObject.GetComponent<Renderer>().material;
+                    hit.collider.transform.gameObject.GetComponent<Renderer>().material = hitObjectMaterial;
+                }
+            }
+
+            targetDistance.SetText("Distance: " + hit.distance.ToString("0.00") + "m");
+
+            lastObjectHit = hit.collider.transform;
+        }
+        else
+        {
+            targetName.SetText("Ready to scan");
+            targetPosition.SetText("Ready to scan");
+            targetDistance.SetText("Ready to scan");
+            targetSize.SetText("Ready to scan");
+
+            if (lastObjectHit != null
+                && lastObjectHit.transform.gameObject.GetComponent<Renderer>() != null
+                && hitObjectOriginalMaterial != null)
+            {
+                lastObjectHit.transform.gameObject.GetComponent<Renderer>().material = hitObjectOriginalMaterial;
+            }
+
+            lastObjectHit = null;
         }
 
         laserRenderer.SetPosition(1, laserRenderer.transform.InverseTransformPoint(worldHit));
