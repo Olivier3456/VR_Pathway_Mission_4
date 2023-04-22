@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -8,10 +9,11 @@ public class Scanner : XRGrabInteractable
     [Header("Scanner Data")]
     public Animator animator;
     public LineRenderer laserRenderer;
-
-
+    public TextMeshProUGUI targetName;
+    public TextMeshProUGUI targetPosition;
+    
     private AudioSource audioSource;
-
+    [Space(10)]
     public AudioClip grabbedSound;
     public AudioClip throwedSound;
     public AudioClip activatedSound;
@@ -21,6 +23,8 @@ public class Scanner : XRGrabInteractable
     {
         base.Awake();
         laserRenderer.gameObject.SetActive(false);
+        targetName.gameObject.SetActive(false);
+        targetPosition.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -36,6 +40,7 @@ public class Scanner : XRGrabInteractable
         audioSource.PlayOneShot(grabbedSound);
 
         args.interactorObject.transform.gameObject.GetComponent<XRBaseControllerInteractor>().SendHapticImpulse(1, 0.2f);
+        Debug.Log(args.interactorObject.transform.name + " a vibré.");
     }
 
 
@@ -53,6 +58,8 @@ public class Scanner : XRGrabInteractable
         laserRenderer.gameObject.SetActive(true);
         audioSource.clip = activatedSound;
         audioSource.Play();
+        targetName.gameObject.SetActive(true);
+        targetPosition.gameObject.SetActive(true);
     }
 
 
@@ -61,6 +68,8 @@ public class Scanner : XRGrabInteractable
         base.OnDeactivated(args);
         laserRenderer.gameObject.SetActive(false);
         audioSource.Stop();
+        targetName.gameObject.SetActive(false);
+        targetPosition.gameObject.SetActive(false);
     }
 
 }
