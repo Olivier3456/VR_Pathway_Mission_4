@@ -4717,6 +4717,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecc085bf63270540b2d9a418fb5f149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &416752678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4092131365389554000, guid: 63d7ab9de7ce12a40b5e8a8ac1742803,
+    type: 3}
+  m_PrefabInstance: {fileID: 822903773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &427063462
 GameObject:
   m_ObjectHideFlags: 0
@@ -10500,7 +10506,7 @@ MonoBehaviour:
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 1
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -10538,6 +10544,9 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+  attachPoint: {fileID: 416752678}
+  balloonPrefab: {fileID: 135654060728766064, guid: 779ea2c758668eb40970ca262141ff99,
+    type: 3}
 --- !u!54 &822903776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10554,6 +10563,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &822903778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822903774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ee845c44c6f8a4ebfa6cc848ce3e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beginThreshold: 4
+  endThreshold: 1
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 822903775}
+        m_TargetAssemblyTypeName: Inflator, Assembly-CSharp
+        m_MethodName: DetachBalloon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &845859084
 GameObject:
   m_ObjectHideFlags: 0

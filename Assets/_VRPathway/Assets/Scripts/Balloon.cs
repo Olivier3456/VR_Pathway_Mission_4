@@ -18,9 +18,13 @@ public class Balloon : MonoBehaviour
     {
         transform.SetParent(null);
         m_Rigidbody.isKinematic = false;
+
         var force = gameObject.AddComponent<ConstantForce>();
-        
         force.force = Vector3.up;
+
+        Destroy(gameObject, 5f);
+
+        //Debug.Log("[Balloon]: Balloon detached");
     }
-    
+
 }

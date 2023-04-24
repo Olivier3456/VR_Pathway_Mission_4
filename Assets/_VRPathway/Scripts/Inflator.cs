@@ -9,11 +9,13 @@ public class Inflator : XRGrabInteractable
     public Transform attachPoint;
     public Balloon balloonPrefab;
 
+    public float delayBetweenTwoBalloons = 1.0f;
+
     private Balloon m_BalloonInstance;
 
     private XRBaseController m_controller;
 
-    float m_lastTriggerValue;
+    private float m_lastTriggerValue;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
@@ -27,12 +29,6 @@ public class Inflator : XRGrabInteractable
 
         var controllerInteractor = args.interactorObject as XRBaseControllerInteractor;
         m_controller = controllerInteractor.xrController;
-
-
-
-        //Debug.Log(m_controller);
-        //m_controller.SendHapticImpulse(1, 0.5f);
-
     }
 
 
@@ -42,7 +38,7 @@ public class Inflator : XRGrabInteractable
     {
         base.ProcessInteractable(updatePhase);
 
-        if (isSelected && m_controller != null)
+        if (isSelected && m_controller != null && m_BalloonInstance != null)
         {
             m_BalloonInstance.transform.localScale = Vector3.one *
                 Mathf.Lerp(1.0f, 4.0f, m_controller.activateInteractionState.value);
@@ -55,7 +51,7 @@ public class Inflator : XRGrabInteractable
             {
                 m_controller.SendHapticImpulse(vibrationIntensity * 5, 0.1f);
             }
-            
+
             m_lastTriggerValue = m_controller.activateInteractionState.value;
         }
     }
@@ -66,6 +62,35 @@ public class Inflator : XRGrabInteractable
     {
         base.OnSelectExited(args);
 
-        Destroy(m_BalloonInstance.gameObject);
+        if (m_BalloonInstance != null)
+        {
+            Destroy(m_BalloonInstance.gameObject);
+        }
+
+
+        //Debug.Log("[Inflator] : OnSelectExited");
+    }
+
+
+
+    public void DetachBalloon()
+    {
+        if (m_BalloonInstance != null)
+        {
+            m_BalloonInstance.Detach();
+            //m_BalloonInstance = Instantiate(balloonPrefab, attachPoint);
+            m_BalloonInstance = null;
+            StartCoroutine(DelayBeforeNextBalloon());
+        }
+
+        //Debug.Log("[Inflator]: DetachBalloon()");
+    }
+
+
+
+    private IEnumerator DelayBeforeNextBalloon()
+    {
+        yield return new WaitForSeconds(delayBetweenTwoBalloons);
+        m_BalloonInstance = Instantiate(balloonPrefab, attachPoint);
     }
 }
