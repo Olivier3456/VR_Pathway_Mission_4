@@ -48,7 +48,7 @@ namespace Unity.XRContent.Interaction
             }
         }
 
-        void OnSelect(SelectEnterEventArgs args)
+        public void OnSelect(SelectEnterEventArgs args)
         {
             // Get the controller from the interactor, and then the activation control from there
             var controllerInteractor = args.interactorObject as XRBaseControllerInteractor;
@@ -56,7 +56,7 @@ namespace Unity.XRContent.Interaction
             {
                 Debug.LogWarning($"Selected by {args.interactorObject.transform.name}, which is not an XRBaseControllerInteractor", this);
                 return;
-            }
+            }            
 
             m_Controller = controllerInteractor.xrController;
             if (m_Controller == null)

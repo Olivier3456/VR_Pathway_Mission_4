@@ -22,7 +22,7 @@ public class Balloon : MonoBehaviour
         var force = gameObject.AddComponent<ConstantForce>();
         force.force = Vector3.up;
 
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 5.0f);
 
         //Debug.Log("[Balloon]: Balloon detached");
     }
